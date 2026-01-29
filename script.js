@@ -35,13 +35,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 ============================================================ */
 
 async function loadPlayers() {
-  const url = "https://script.google.com/macros/s/AKfycbywux9HglEC8QrWZlVuo_DSfWoN1TPws0gE4LdAXM5-eRKGSXUGfJD-SUYhAtwp_L71-Q/exec";
+  const url = "https://docs.google.com/spreadsheets/d/1sVhmmhRRESUvaLSyHCqPp6R-U7FwOQWL-3xtZ7W7g3w/gviz/tq?tqx=out:json";
 
-  const response = await fetch(url);
-  const data = await response.json();
+  const res = await fetch(url);
+  const text = await res.text();
 
-  players = Object.values(data).flatMap(county => county.players);
+  // Google wraps JSON in a function call, so we strip it
+  const json = JSON.parse(text.substring(47, text.length - 2));
+
+  const rows = json.table.rows;
+
+  const players = rows.map(r => ({
+    name: r.c[0]?.v,
+    county: r.c[1]?.v,
+    position: r.c[2]?.v,
+    price: r.c[3]?.v
+  }));
+
+  const container = document.getElementById("player-list");
+  container.innerHTML = players.map(p => `
+    <div>
+      <strong>${p.name}</strong> (${p.county}) - ${p.position} - €${p.price}m
+    </div>
+  `).join("");
 }
+
+loadPlayers();
 
 
 /* ============================================================
