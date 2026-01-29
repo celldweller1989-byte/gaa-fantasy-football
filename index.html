@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GAA Fantasy Football</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header-left">
+      <h1>GAA Fantasy Football</h1>
+      <p class="subtitle">League & Championship · Budget: €100m · Max 3 players per county</p>
+    </div>
+    <div class="app-header-right">
+      <div class="budget-display">
+        <span>Budget Remaining:</span>
+        <strong id="budgetRemaining">€100.0m</strong>
+      </div>
+      <div class="gameweek-select">
+        <label for="gameweekSelect">Gameweek:</label>
+        <select id="gameweekSelect"></select>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="left-panel">
+      <div class="panel">
+        <h2>Available Players</h2>
+        <div class="filters">
+          <div class="filter-group">
+            <label for="positionFilter">Position</label>
+            <select id="positionFilter">
+              <option value="">All</option>
+              <option value="GK">Goalkeepers</option>
+              <option value="DEF">Defenders</option>
+              <option value="MID">Midfielders</option>
+              <option value="FWD">Forwards</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="countyFilter">County</label>
+            <input type="text" id="countyFilter" placeholder="e.g. Kerry, Dublin" />
+          </div>
+          <div class="filter-group">
+            <label for="searchFilter">Search</label>
+            <input type="text" id="searchFilter" placeholder="Player name" />
+          </div>
+        </div>
+
+        <div class="players-list" id="playersList">
+          <!-- Filled by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <section class="right-panel">
+      <div class="panel team-panel">
+        <h2>Your Team</h2>
+        <p class="team-rules">
+          1 GK · 6 DEF · 2 MID · 6 FWD · Max 3 players per county
+        </p>
+
+        <div class="team-layout">
+          <div class="team-line">
+            <h3>Goalkeeper</h3>
+            <div class="dropzone" data-position="GK" data-max="1" id="zoneGK"></div>
+          </div>
+
+          <div class="team-line">
+            <h3>Defenders (6)</h3>
+            <div class="dropzone" data-position="DEF" data-max="6" id="zoneDEF"></div>
+          </div>
+
+          <div class="team-line">
+            <h3>Midfielders (2)</h3>
+            <div class="dropzone" data-position="MID" data-max="2" id="zoneMID"></div>
+          </div>
+
+          <div class="team-line">
+            <h3>Forwards (6)</h3>
+            <div class="dropzone" data-position="FWD" data-max="6" id="zoneFWD"></div>
+          </div>
+        </div>
+
+        <div class="team-summary">
+          <div>
+            <span>Total Players:</span>
+            <strong id="totalPlayers">0 / 15</strong>
+          </div>
+          <div>
+            <span>Current Gameweek Points:</span>
+            <strong id="currentGWPoints">0</strong>
+          </div>
+          <div>
+            <span>Total Season Points:</span>
+            <strong id="totalSeasonPoints">0</strong>
+          </div>
+        </div>
+
+        <div class="county-limits" id="countyLimits">
+          <!-- Filled by script.js -->
+        </div>
+
+        <div class="team-actions">
+          <button id="saveTeamBtn">Save Team (Local)</button>
+          <button id="resetTeamBtn" class="secondary">Reset Team</button>
+        </div>
+      </div>
+
+      <div class="panel transfers-panel">
+        <h2>Transfers</h2>
+        <p class="team-rules">
+          Max 2 transfers per gameweek. Transfers affect budget and team composition.
+        </p>
+
+        <div class="transfers-info">
+          <div>
+            <span>Transfers Used This GW:</span>
+            <strong id="transfersUsed">0 / 2</strong>
+          </div>
+        </div>
+
+        <div class="transfers-log">
+          <h3>Transfer Log</h3>
+          <ul id="transferLog"></ul>
+        </div>
+      </div>
+
+      <div class="panel points-panel">
+        <h2>Gameweek Points</h2>
+        <table class="points-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>County</th>
+              <th>Pos</th>
+              <th>Price</th>
+              <th>GW Points</th>
+              <th>Season Total</th>
+            </tr>
+          </thead>
+          <tbody id="pointsTableBody">
+            <!-- Filled by script.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>GAA Fantasy Football · Custom system built by you · Data from D1 & D2 sheets</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
