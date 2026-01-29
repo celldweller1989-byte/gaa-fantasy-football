@@ -35,24 +35,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 ============================================================ */
 
 async function loadPlayers() {
-  const res = await fetch("data/players.json");
-  players = await res.json();
+  const url = "https://script.google.com/macros/s/AKfycbywux9HglEC8QrWZlVuo_DSfWoN1TPws0gE4LdAXM5-eRKGSXUGfJD-SUYhAtwp_L71-Q/exec";
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  players = Object.values(data).flatMap(county => county.players);
 }
 
-async function loadGameweeks() {
-  const res = await fetch("data/gameweeks.json");
-  gameweeks = await res.json();
-
-  const select = document.getElementById("gameweekSelect");
-  gameweeks.forEach(gw => {
-    const opt = document.createElement("option");
-    opt.value = gw.id;
-    opt.textContent = gw.name;
-    select.appendChild(opt);
-  });
-
-  select.addEventListener("change", updatePointsTable);
-}
 
 /* ============================================================
    RENDER PLAYER LIST
